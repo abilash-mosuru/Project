@@ -26,7 +26,7 @@ throw new IllegalStateException("resource.properties not found in classpath");
     public static Connection getConnection() throws SQLException {
         String url = properties.getProperty("spring.datasource.url");
         String user = properties.getProperty("spring.datasource.username");
-     String password = properties.getProperty("spring.datasource.password");
+        String password = properties.getProperty("spring.datasource.password");
         return DriverManager.getConnection(url, user, password);
     }
 }
