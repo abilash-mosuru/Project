@@ -1,24 +1,16 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { LoginComponent } from "./components/login/login.component";
+import { UserComponent } from "./components/user/user.component";
 
 const routes: Routes = [
-  {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-  },
-  {
-    path: 'supplylink',
-    loadChildren: () => import('./supplylink/supplylink.module').then((m) => m.SupplyLinkModule),
-  },
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: '/auth', 
-  }
+  { path: "", component: LoginComponent },
+  { path: "login", component: LoginComponent },
+  { path: "add-user", component: UserComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AuthRoutingModule { }
