@@ -1,29 +1,26 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-
-import { AuthRoutingModule } from "./auth-routing.module";
-import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
-import { RouterModule } from "@angular/router";
-import { LoginComponent } from "./components/login/login.component";
-import { LogoutComponent } from "./components/logout/logout.component";
-import { UserComponent } from "./components/user/user.component";
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';  
+import { AuthInterceptor } from './auth.interceptors';
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    LogoutComponent,
-    UserComponent
+    AppComponent
   ],
   imports: [
-    CommonModule,
-    AuthRoutingModule,
-    ReactiveFormsModule,
+    BrowserModule,
     HttpClientModule,
-    RouterModule
+    AppRoutingModule
   ],
-  exports: [
-    LogoutComponent
-  ]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent]
 })
-export class AuthModule {}
+export class AppModule {}
